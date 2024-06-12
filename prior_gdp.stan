@@ -15,7 +15,7 @@ parameters {
 }
 
 model {
-  alpha ~ normal(mu_alpha, sig_alpha); ##based on fertility rate
+  alpha ~ normal(mu_alpha, sig_alpha); //based on fertility rate
   beta_gdp ~ normal(mu_beta, sig_beta);
 }
 
