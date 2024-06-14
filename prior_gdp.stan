@@ -37,7 +37,7 @@ generated quantities {
 
   array[N] real y_pred;
   for (j in 1:N) {
-    real shape_adjusted = (shape + alpha + beta_gdp * 10000/gdp_per_capita[j]);
+    real shape_adjusted = (shape + alpha + beta_gdp * gdp_per_capita[j]);
     y_pred[j] = gamma_rng(shape_adjusted, rate);
   }
 }

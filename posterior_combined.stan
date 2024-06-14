@@ -67,7 +67,7 @@ model {
   beta_var ~ normal(mu_beta, sig_beta);
 
   for (j in 1:N) {
-    real shape_adjust = (shape + alpha + beta_var * (10000/gdp_per_capita[j] + 100/labor_force[j] + 100/contaceptive_prevalence[j]));
+    real shape_adjust = (shape + alpha + beta_var * (gdp_per_capita[j] + labor_force[j] + contaceptive_prevalence[j]));
     fertility_rate[j] ~ gamma(shape_adjust, rate);
   }
 }
@@ -76,7 +76,7 @@ generated quantities {
   array[N] real y_pred;
   array[N] real log_likelihood;
   for (j in 1:N) {
-    real shape_adjusted = (shape + alpha + beta_var * (10000/gdp_per_capita[j] + 100/labor_force[j] + 100/contaceptive_prevalence[j]));
+    real shape_adjusted = (shape + alpha + beta_var * (gdp_per_capita[j] + labor_force[j] + contaceptive_prevalence[j]));
     y_pred[j] = gamma_rng(shape_adjusted, rate);
     log_likelihood[j] = gamma_lpdf(fertility_rate[j] | shape_adjusted, rate);
   }
